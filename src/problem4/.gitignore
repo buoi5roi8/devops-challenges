@@ -1,0 +1,14 @@
+.env
+node_modules/
+dist/
+coverage/
+.DS_Store
+
+# Terraform state is never committed
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Deployment packages
+backend-release-*.tgz
+frontend-release-*.tgz

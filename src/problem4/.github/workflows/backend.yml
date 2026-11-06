@@ -1,0 +1,107 @@
+name: Backend CI/CD
+
+on:
+  pull_request:
+    branches: [main]
+    paths: [backend/**, .github/workflows/backend.yml]
+  push:
+    branches: [main]
+    paths: [backend/**, .github/workflows/backend.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-production
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: '22'
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  RELEASE_BUCKET: ${{ vars.RELEASE_BUCKET }}
+  EC2_INSTANCE_TAG: ${{ vars.EC2_INSTANCE_TAG }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Install, lint, test
+        working-directory: backend
+        run: |
+          npm ci
+          npm run lint
+          npm test
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment:
+      name: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - name: Install production dependencies
+        working-directory: backend
+        run: npm ci --omit=dev
+      - name: Create immutable release bundle
+        run: |
+          tar --sort=name --mtime="@0" --owner=0 --group=0 --numeric-owner \
+            -czf backend-release-${{ github.sha }}.tgz -C backend package.json package-lock.json src node_modules
+          sha256sum backend-release-${{ github.sha }}.tgz | tee backend-release-${{ github.sha }}.tgz.sha256
+      - name: Configure AWS credentials via GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Upload immutable release
+        run: |
+          test -n "$RELEASE_BUCKET" && test -n "$EC2_INSTANCE_TAG"
+          aws s3 cp backend-release-${{ github.sha }}.tgz "s3://$RELEASE_BUCKET/backend/${{ github.sha }}.tgz" --sse AES256 --no-progress
+          aws s3 cp backend-release-${{ github.sha }}.tgz.sha256 "s3://$RELEASE_BUCKET/backend/${{ github.sha }}.tgz.sha256" --sse AES256 --no-progress
+      - name: Roll out one instance at a time through SSM
+        id: rollout
+        run: |
+          mapfile -t instance_ids < <(aws ec2 describe-instances \
+            --filters "Name=tag:${EC2_INSTANCE_TAG},Values=true" "Name=instance-state-name,Values=running" \
+            --query 'Reservations[].Instances[].InstanceId' --output text | tr '\t' '\n')
+          ((${#instance_ids[@]} > 0))
+          command_id=$(aws ssm send-command \
+            --document-name AWS-RunShellScript \
+            --instance-ids "${instance_ids[@]}" \
+            --max-concurrency 1 \
+            --max-errors 0 \
+            --timeout-seconds 600 \
+            --comment "backend ${{ github.sha }}" \
+            --parameters "commands=[\"sudo /opt/product/bin/deploy-backend.sh '$RELEASE_BUCKET' '${{ github.sha }}'\"]" \
+            --query 'Command.CommandId' --output text)
+          echo "command_id=$command_id" >> "$GITHUB_OUTPUT"
+          for instance_id in "${instance_ids[@]}"; do
+            aws ssm wait command-executed --command-id "$command_id" --instance-id "$instance_id"
+          done
+          aws ssm list-command-invocations --command-id "$command_id" --details --output table
+      - name: Record deployment summary
+        if: always()
+        run: |
+          {
+            echo '### Backend production deployment'
+            echo 'Commit: ${{ github.sha }}'
+            echo 'SSM command: ${{ steps.rollout.outputs.command_id }}'
+            echo 'Rollback: rerun this workflow at a previously known-good commit.'
+          } >> "$GITHUB_STEP_SUMMARY"

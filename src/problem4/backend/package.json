@@ -1,0 +1,14 @@
+{
+  "name": "backend-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "lint": "node --check src/server.js && node --check test/server.test.js"
+  },
+  "engines": {
+    "node": ">=22 <23"
+  }
+}

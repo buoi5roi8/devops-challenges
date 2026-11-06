@@ -1,0 +1,379 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1120" width="1500" height="1120" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <!-- Layer Box Gradients -->
+    <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E1B4B" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#311042" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="eksGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F2942" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#0A192F" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="kafkaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2E1065" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4C1D95" stop-opacity="0.8"/>
+    </linearGradient>
+    <!-- Arrow Markers -->
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#F59E0B"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38BDF8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#A855F7"/>
+    </marker>
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Main Background -->
+  <rect width="1500" height="1120" fill="url(#bgGrad)"/>
+
+  <!-- Header Banner -->
+  <rect x="20" y="15" width="1460" height="58" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+  <text x="45" y="42" fill="#F8FAFC" font-size="20" font-weight="700">CASTLE IN THE CLOUD — PRODUCTION TRADING SYSTEM TOPOLOGY &amp; DATA FLOW (AWS)</text>
+  <text x="45" y="62" fill="#94A3B8" font-size="12.5">Target: 500+ req/s (Scalable to 50k+ req/s)  |  SLO: API Ack p99 &lt; 25ms (Bound &lt; 100ms)  |  Zero Financial Data Loss (acks=all, Atomic Fund Lock, Double-Entry Ledger)</text>
+
+  <!-- Legend -->
+  <g transform="translate(1060, 26)">
+    <rect x="0" y="0" width="400" height="36" rx="6" fill="#0F172A" stroke="#334155"/>
+    <line x1="15" y1="18" x2="45" y2="18" stroke="#F59E0B" stroke-width="2.5" marker-end="url(#arrowOrange)"/>
+    <text x="52" y="22" fill="#E2E8F0" font-size="11" font-weight="600">Hot Path (Sync)</text>
+    <line x1="145" y1="18" x2="175" y2="18" stroke="#A855F7" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
+    <text x="182" y="22" fill="#E2E8F0" font-size="11" font-weight="600">Kafka Event Stream</text>
+    <line x1="295" y1="18" x2="325" y2="18" stroke="#10B981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+    <text x="332" y="22" fill="#E2E8F0" font-size="11" font-weight="600">Storage / Push</text>
+  </g>
+
+  <!-- ================= LEFT SIDEBAR: OBSERVABILITY ================= -->
+  <g filter="url(#glow)">
+    <rect x="20" y="88" width="195" height="950" rx="10" fill="#131C2E" stroke="#0EA5E9" stroke-width="1.5"/>
+    <rect x="20" y="88" width="195" height="36" rx="10" fill="#0369A1"/>
+    <text x="117" y="111" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">OBSERVABILITY STACK</text>
+
+    <rect x="35" y="145" width="165" height="95" rx="8" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="117" y="170" fill="#38BDF8" font-size="13" font-weight="700" text-anchor="middle">OpenTelemetry</text>
+    <text x="117" y="190" fill="#CBD5E1" font-size="11" text-anchor="middle">ADOT Collector DaemonSet</text>
+    <text x="117" y="208" fill="#94A3B8" font-size="10.5" text-anchor="middle">Vendor-Neutral Traces</text>
+    <text x="117" y="224" fill="#94A3B8" font-size="10.5" text-anchor="middle">&amp; Prometheus Metrics</text>
+
+    <rect x="35" y="265" width="165" height="95" rx="8" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="117" y="290" fill="#38BDF8" font-size="13" font-weight="700" text-anchor="middle">Amazon CloudWatch</text>
+    <text x="117" y="310" fill="#CBD5E1" font-size="11" text-anchor="middle">Container Insights</text>
+    <text x="117" y="328" fill="#94A3B8" font-size="10.5" text-anchor="middle">Centralized Logs &amp; Alarms</text>
+    <text x="117" y="344" fill="#94A3B8" font-size="10.5" text-anchor="middle">SLO Latency Alerts</text>
+
+    <rect x="35" y="385" width="165" height="95" rx="8" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="117" y="410" fill="#38BDF8" font-size="13" font-weight="700" text-anchor="middle">AWS X-Ray</text>
+    <text x="117" y="430" fill="#CBD5E1" font-size="11" text-anchor="middle">Distributed Tracing</text>
+    <text x="117" y="448" fill="#94A3B8" font-size="10.5" text-anchor="middle">End-to-End Order Path</text>
+    <text x="117" y="464" fill="#94A3B8" font-size="10.5" text-anchor="middle">p99 Bottleneck Analysis</text>
+
+    <rect x="35" y="505" width="165" height="95" rx="8" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="117" y="530" fill="#38BDF8" font-size="13" font-weight="700" text-anchor="middle">Managed Prometheus</text>
+    <text x="117" y="550" fill="#CBD5E1" font-size="11" text-anchor="middle">AMP + KEDA Metrics</text>
+    <text x="117" y="568" fill="#94A3B8" font-size="10.5" text-anchor="middle">Kafka Consumer Lag</text>
+    <text x="117" y="584" fill="#94A3B8" font-size="10.5" text-anchor="middle">Matching Engine Latency</text>
+
+    <rect x="35" y="625" width="165" height="95" rx="8" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="117" y="650" fill="#38BDF8" font-size="13" font-weight="700" text-anchor="middle">Managed Grafana</text>
+    <text x="117" y="670" fill="#CBD5E1" font-size="11" text-anchor="middle">Real-Time Dashboards</text>
+    <text x="117" y="688" fill="#94A3B8" font-size="10.5" text-anchor="middle">Order Book Health</text>
+    <text x="117" y="704" fill="#94A3B8" font-size="10.5" text-anchor="middle">PagerDuty / Slack Alerts</text>
+
+    <rect x="35" y="745" width="165" height="110" rx="8" fill="#0F172A" stroke="#334155" stroke-dasharray="4,4"/>
+    <text x="117" y="768" fill="#F59E0B" font-size="12" font-weight="700" text-anchor="middle">LATENCY BUDGET</text>
+    <text x="45" y="788" fill="#CBD5E1" font-size="10.5">• Edge → ALB: ~5ms</text>
+    <text x="45" y="804" fill="#CBD5E1" font-size="10.5">• Auth + Lua Lock: ~4ms</text>
+    <text x="45" y="820" fill="#CBD5E1" font-size="10.5">• MSK (acks=all): ~8ms</text>
+    <text x="45" y="838" fill="#10B981" font-size="11" font-weight="700">Total API Ack: ~19ms</text>
+  </g>
+
+  <!-- ================= RIGHT SIDEBAR: SECURITY & GOVERNANCE ================= -->
+  <g filter="url(#glow)">
+    <rect x="1285" y="88" width="195" height="950" rx="10" fill="#131C2E" stroke="#F43F5E" stroke-width="1.5"/>
+    <rect x="1285" y="88" width="195" height="36" rx="10" fill="#BE123C"/>
+    <text x="1382" y="111" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle">SECURITY &amp; IDENTITY</text>
+
+    <rect x="1300" y="145" width="165" height="95" rx="8" fill="#1E293B" stroke="#FB7185"/>
+    <text x="1382" y="170" fill="#FB7185" font-size="13" font-weight="700" text-anchor="middle">Amazon Cognito</text>
+    <text x="1382" y="190" fill="#CBD5E1" font-size="11" text-anchor="middle">User Pools · OAuth2/OIDC</text>
+    <text x="1382" y="208" fill="#94A3B8" font-size="10.5" text-anchor="middle">Adaptive MFA &amp; Passkeys</text>
+    <text x="1382" y="224" fill="#94A3B8" font-size="10.5" text-anchor="middle">HMAC API Key Auth (HFT)</text>
+
+    <rect x="1300" y="265" width="165" height="95" rx="8" fill="#1E293B" stroke="#FB7185"/>
+    <text x="1382" y="290" fill="#FB7185" font-size="13" font-weight="700" text-anchor="middle">Secrets Manager</text>
+    <text x="1382" y="310" fill="#CBD5E1" font-size="11" text-anchor="middle">Auto-Rotation</text>
+    <text x="1382" y="328" fill="#94A3B8" font-size="10.5" text-anchor="middle">DB &amp; Kafka Credentials</text>
+    <text x="1382" y="344" fill="#94A3B8" font-size="10.5" text-anchor="middle">EKS CSI Secrets Driver</text>
+
+    <rect x="1300" y="385" width="165" height="95" rx="8" fill="#1E293B" stroke="#FB7185"/>
+    <text x="1382" y="410" fill="#FB7185" font-size="13" font-weight="700" text-anchor="middle">AWS KMS</text>
+    <text x="1382" y="430" fill="#CBD5E1" font-size="11" text-anchor="middle">FIPS 140-3 HSM Keys</text>
+    <text x="1382" y="448" fill="#94A3B8" font-size="10.5" text-anchor="middle">Envelope Encryption</text>
+    <text x="1382" y="464" fill="#94A3B8" font-size="10.5" text-anchor="middle">At-Rest &amp; Wallet Signing</text>
+
+    <rect x="1300" y="505" width="165" height="95" rx="8" fill="#1E293B" stroke="#FB7185"/>
+    <text x="1382" y="530" fill="#FB7185" font-size="13" font-weight="700" text-anchor="middle">IAM Roles (IRSA)</text>
+    <text x="1382" y="550" fill="#CBD5E1" font-size="11" text-anchor="middle">Pod Identity &amp; mTLS</text>
+    <text x="1382" y="568" fill="#94A3B8" font-size="10.5" text-anchor="middle">Least-Privilege Per Pod</text>
+    <text x="1382" y="584" fill="#94A3B8" font-size="10.5" text-anchor="middle">NetworkPolicies / Cilium</text>
+
+    <rect x="1300" y="625" width="165" height="95" rx="8" fill="#1E293B" stroke="#FB7185"/>
+    <text x="1382" y="650" fill="#FB7185" font-size="13" font-weight="700" text-anchor="middle">AWS CloudTrail</text>
+    <text x="1382" y="670" fill="#CBD5E1" font-size="11" text-anchor="middle">+ GuardDuty &amp; Config</text>
+    <text x="1382" y="688" fill="#94A3B8" font-size="10.5" text-anchor="middle">Immutable Security Audit</text>
+    <text x="1382" y="704" fill="#94A3B8" font-size="10.5" text-anchor="middle">Anomaly Detection</text>
+
+    <rect x="1300" y="745" width="165" height="110" rx="8" fill="#0F172A" stroke="#334155" stroke-dasharray="4,4"/>
+    <text x="1382" y="768" fill="#38BDF8" font-size="12" font-weight="700" text-anchor="middle">VPC &amp; PRIVATELINK</text>
+    <text x="1310" y="788" fill="#CBD5E1" font-size="10.5">• 3 AZ Private Subnets</text>
+    <text x="1310" y="804" fill="#CBD5E1" font-size="10.5">• S3/DDB Gateway Endpoints</text>
+    <text x="1310" y="820" fill="#CBD5E1" font-size="10.5">• Zero Public DB/MSK IP</text>
+    <text x="1310" y="838" fill="#10B981" font-size="10.5" font-weight="700">• AZ-Aware Routing (Cut $)</text>
+  </g>
+
+  <!-- ================= LAYER 1: EDGE & CDN LAYER ================= -->
+  <g filter="url(#glow)">
+    <rect x="235" y="88" width="1030" height="105" rx="10" fill="url(#edgeGrad)" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="255" y="110" fill="#FBBF24" font-size="12" font-weight="700" letter-spacing="1">1. EDGE &amp; PERIMETER SECURITY LAYER</text>
+
+    <!-- Route 53 -->
+    <rect x="260" y="120" width="270" height="58" rx="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="395" y="143" fill="#F8FAFC" font-size="13.5" font-weight="700" text-anchor="middle">Amazon Route 53</text>
+    <text x="395" y="162" fill="#94A3B8" font-size="11" text-anchor="middle">Latency-Based DNS · Health Checks · 100% SLA</text>
+
+    <!-- CloudFront -->
+    <rect x="615" y="120" width="270" height="58" rx="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="750" y="143" fill="#F8FAFC" font-size="13.5" font-weight="700" text-anchor="middle">Amazon CloudFront</text>
+    <text x="750" y="162" fill="#94A3B8" font-size="11" text-anchor="middle">Edge TLS 1.3 Termination · SPA CDN · Keep-Alive</text>
+
+    <!-- AWS WAF & Shield -->
+    <rect x="970" y="120" width="270" height="58" rx="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="1105" y="143" fill="#F8FAFC" font-size="13.5" font-weight="700" text-anchor="middle">AWS WAF + Shield</text>
+    <text x="1105" y="162" fill="#94A3B8" font-size="11" text-anchor="middle">DDoS Protection · Rate Limiting · Geo/IP Filtering</text>
+
+    <line x1="530" y1="149" x2="612" y2="149" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrowOrange)"/>
+    <line x1="885" y1="149" x2="967" y2="149" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  </g>
+
+  <!-- ================= LAYER 2: API & INGRESS LAYER ================= -->
+  <g filter="url(#glow)">
+    <rect x="235" y="210" width="1030" height="105" rx="10" fill="#162032" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="255" y="232" fill="#38BDF8" font-size="12" font-weight="700" letter-spacing="1">2. API &amp; REAL-TIME STREAMING INGRESS LAYER</text>
+
+    <!-- ALB -->
+    <rect x="280" y="242" width="420" height="58" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="490" y="265" fill="#F8FAFC" font-size="13.5" font-weight="700" text-anchor="middle">Application Load Balancer (ALB / NLB)</text>
+    <text x="490" y="284" fill="#94A3B8" font-size="11" text-anchor="middle">HTTPS / gRPC Routing · AWS LBC IP Mode (Pod Direct)</text>
+
+    <!-- API Gateway WebSocket -->
+    <rect x="790" y="242" width="435" height="58" rx="8" fill="#1E293B" stroke="#10B981" stroke-width="1.5"/>
+    <text x="1007" y="265" fill="#F8FAFC" font-size="13.5" font-weight="700" text-anchor="middle">API Gateway (WebSocket) / NLB WS Gateway</text>
+    <text x="1007" y="284" fill="#94A3B8" font-size="11" text-anchor="middle">Stateful WebSocket Streams · Order Book Depth &amp; Fills</text>
+  </g>
+
+  <!-- Edge to API Arrows -->
+  <path d="M 750 178 L 750 200 L 490 200 L 490 239" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <path d="M 750 178 L 750 200 L 1007 200 L 1007 239" fill="none" stroke="#10B981" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- ================= LAYER 3: COMPUTE LAYER (AMAZON EKS) ================= -->
+  <g filter="url(#glow)">
+    <rect x="235" y="332" width="1030" height="315" rx="10" fill="url(#eksGrad)" stroke="#38BDF8" stroke-width="2"/>
+    <text x="255" y="355" fill="#38BDF8" font-size="13" font-weight="700" letter-spacing="0.8">3. COMPUTE LAYER — AMAZON EKS CLUSTER (MULTI-AZ · KARPENTER · KEDA AUTO-SCALING)</text>
+
+    <!-- Row 1: Synchronous / Core Trading Hot Path -->
+    <rect x="252" y="368" width="996" height="128" rx="8" fill="#0F172A" fill-opacity="0.65" stroke="#F59E0B" stroke-dasharray="5,4"/>
+    <text x="268" y="386" fill="#FBBF24" font-size="11" font-weight="700">HOT TRADING PATH (ULTRA-LOW LATENCY · IN-MEMORY &amp; ATOMIC RESERVATION)</text>
+
+    <!-- API Gateway Service -->
+    <rect x="265" y="395" width="215" height="88" rx="7" fill="#1E293B" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="372" y="416" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">API Gateway Svc (Go)</text>
+    <text x="372" y="434" fill="#FBBF24" font-size="10.5" font-weight="600" text-anchor="middle">HPA: RPS + CPU</text>
+    <text x="372" y="451" fill="#CBD5E1" font-size="10.5" text-anchor="middle">JWT / HMAC Auth Check</text>
+    <text x="372" y="467" fill="#94A3B8" font-size="10" text-anchor="middle">Token Bucket Rate Limit (Redis)</text>
+
+    <!-- Auth & KYC Service -->
+    <rect x="502" y="395" width="210" height="88" rx="7" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="607" y="416" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Auth &amp; KYC Svc (Java)</text>
+    <text x="607" y="434" fill="#38BDF8" font-size="10.5" font-weight="600" text-anchor="middle">HPA: CPU</text>
+    <text x="607" y="451" fill="#CBD5E1" font-size="10.5" text-anchor="middle">OAuth2 / Session Cache</text>
+    <text x="607" y="467" fill="#94A3B8" font-size="10" text-anchor="middle">KYC Verification &amp; Tier Limits</text>
+
+    <!-- Order & Risk Service -->
+    <rect x="735" y="395" width="235" height="88" rx="7" fill="#1E293B" stroke="#F59E0B" stroke-width="1.8"/>
+    <text x="852" y="416" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Order &amp; Risk Svc (Go)</text>
+    <text x="852" y="434" fill="#FBBF24" font-size="10.5" font-weight="600" text-anchor="middle">HPA: RPS / Queue Depth</text>
+    <text x="852" y="451" fill="#10B981" font-size="10.5" font-weight="700" text-anchor="middle">Atomic Lua Fund Reserve</text>
+    <text x="852" y="467" fill="#94A3B8" font-size="10" text-anchor="middle">Idempotency Key + Pre-Trade Risk</text>
+
+    <!-- Matching Engine -->
+    <rect x="992" y="395" width="242" height="88" rx="7" fill="#27173A" stroke="#F43F5E" stroke-width="2"/>
+    <text x="1113" y="415" fill="#FDA4AF" font-size="13" font-weight="700" text-anchor="middle">Matching Engine (Rust/C++)</text>
+    <text x="1113" y="433" fill="#FB7185" font-size="10.5" font-weight="700" text-anchor="middle">StatefulSet · Symbol Partitioned</text>
+    <text x="1113" y="450" fill="#F8FAFC" font-size="10.5" text-anchor="middle">Single-Thread LMAX RingBuffer</text>
+    <text x="1113" y="467" fill="#94A3B8" font-size="10" text-anchor="middle">In-Memory Book + S3 Snapshots</text>
+
+    <!-- Row 2: Asynchronous Event Consumers & Downstream Microservices -->
+    <rect x="252" y="508" width="996" height="125" rx="8" fill="#0F172A" fill-opacity="0.65" stroke="#38BDF8" stroke-dasharray="5,4"/>
+    <text x="268" y="526" fill="#38BDF8" font-size="11" font-weight="700">ASYNC SETTLEMENT, STREAMING &amp; CQRS READ SERVICES (KEDA KAFKA LAG / WS SCALED)</text>
+
+    <!-- Wallet & Settlement Service -->
+    <rect x="265" y="535" width="225" height="86" rx="7" fill="#1E293B" stroke="#10B981" stroke-width="1.5"/>
+    <text x="377" y="556" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Wallet &amp; Ledger Svc (Java)</text>
+    <text x="377" y="574" fill="#10B981" font-size="10.5" font-weight="600" text-anchor="middle">KEDA: Kafka Consumer Lag</text>
+    <text x="377" y="591" fill="#CBD5E1" font-size="10.5" text-anchor="middle">ACID Double-Entry Settlement</text>
+    <text x="377" y="607" fill="#94A3B8" font-size="10" text-anchor="middle">Transactional Outbox + Redis Sync</text>
+
+    <!-- Market Data Service -->
+    <rect x="512" y="535" width="225" height="86" rx="7" fill="#1E293B" stroke="#10B981" stroke-width="1.5"/>
+    <text x="624" y="556" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Market Data Svc (Go)</text>
+    <text x="624" y="574" fill="#10B981" font-size="10.5" font-weight="600" text-anchor="middle">HPA: Active WS Connections</text>
+    <text x="624" y="591" fill="#CBD5E1" font-size="10.5" text-anchor="middle">L2 Order Book Aggregator</text>
+    <text x="624" y="607" fill="#94A3B8" font-size="10" text-anchor="middle">OHLCV Tick Stream &amp; Redis PubSub</text>
+
+    <!-- Trade History & Reporting Service -->
+    <rect x="759" y="535" width="225" height="86" rx="7" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="871" y="556" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Trade History Svc (Java)</text>
+    <text x="871" y="574" fill="#38BDF8" font-size="10.5" font-weight="600" text-anchor="middle">KEDA: Kafka Consumer Lag</text>
+    <text x="871" y="591" fill="#CBD5E1" font-size="10.5" text-anchor="middle">CQRS Read Model Projection</text>
+    <text x="871" y="607" fill="#94A3B8" font-size="10" text-anchor="middle">Writes to DynamoDB &amp; Timestream</text>
+
+    <!-- Notification Service -->
+    <rect x="1006" y="535" width="228" height="86" rx="7" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="1120" y="556" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Notification Svc (Node.js)</text>
+    <text x="1120" y="574" fill="#38BDF8" font-size="10.5" font-weight="600" text-anchor="middle">KEDA: SQS Queue Depth</text>
+    <text x="1120" y="591" fill="#CBD5E1" font-size="10.5" text-anchor="middle">Price Alerts &amp; Order Execution</text>
+    <text x="1120" y="607" fill="#94A3B8" font-size="10" text-anchor="middle">Push / Email / SMS via SNS</text>
+  </g>
+
+  <!-- Internal Service Calls -->
+  <line x1="480" y1="439" x2="500" y2="439" stroke="#38BDF8" stroke-width="1.8" marker-end="url(#arrowCyan)"/>
+  <path d="M 372 395 L 372 375 L 852 375 L 852 392" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <text x="615" y="371" fill="#FBBF24" font-size="10" font-weight="600" text-anchor="middle">gRPC Forward Validated Order</text>
+
+  <!-- ALB to EKS Services -->
+  <path d="M 490 300 L 490 345 L 372 345 L 372 392" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <!-- Market Data to WS API GW -->
+  <path d="M 624 535 L 624 502 L 980 502 L 980 303" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowGreen)"/>
+
+  <!-- ================= LAYER 4: MESSAGING & EVENT BACKBONE ================= -->
+  <g filter="url(#glow)">
+    <rect x="235" y="665" width="1030" height="125" rx="10" fill="url(#kafkaGrad)" stroke="#A855F7" stroke-width="2"/>
+    <text x="255" y="688" fill="#E9D5FF" font-size="12.5" font-weight="700" letter-spacing="1">4. MESSAGING &amp; EVENT SOURCING BACKBONE</text>
+
+    <!-- Amazon SQS -->
+    <rect x="255" y="700" width="215" height="75" rx="8" fill="#1E293B" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="362" y="723" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Amazon SQS + DLQ</text>
+    <text x="362" y="742" fill="#CBD5E1" font-size="10.5" text-anchor="middle">Buffered Notification Queues</text>
+    <text x="362" y="758" fill="#94A3B8" font-size="10" text-anchor="middle">Dead-Letter Queue Replay</text>
+
+    <!-- Amazon MSK (Kafka) -->
+    <rect x="490" y="696" width="520" height="82" rx="8" fill="#1E1B4B" stroke="#C084FC" stroke-width="2"/>
+    <text x="750" y="718" fill="#F8FAFC" font-size="14" font-weight="700" text-anchor="middle">Amazon MSK (Apache Kafka — 3 AZs · RF=3 · min.insync.replicas=2 · acks=all)</text>
+    <text x="750" y="738" fill="#E9D5FF" font-size="11" font-weight="600" text-anchor="middle">Partitioned by Trading Pair (Symbol) — Deterministic Ordering Guarantee</text>
+    <text x="750" y="756" fill="#94A3B8" font-size="10" text-anchor="middle">Topics: orders.submitted | orders.matched | orders.cancelled | market.trades | market.orderbook | wallet.transactions</text>
+
+    <!-- Amazon SNS -->
+    <rect x="1030" y="700" width="215" height="75" rx="8" fill="#1E293B" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="1137" y="723" fill="#F8FAFC" font-size="13" font-weight="700" text-anchor="middle">Amazon SNS</text>
+    <text x="1137" y="742" fill="#CBD5E1" font-size="10.5" text-anchor="middle">High-Throughput Pub/Sub Fan-Out</text>
+    <text x="1137" y="758" fill="#94A3B8" font-size="10" text-anchor="middle">Email / SMS / Mobile Push</text>
+  </g>
+
+  <!-- EKS <-> Kafka Arrows -->
+  <!-- Order Svc -> Kafka -->
+  <path d="M 852 483 L 852 500 L 740 500 L 740 693" fill="none" stroke="#A855F7" stroke-width="2.2" marker-end="url(#arrowPurple)"/>
+  <!-- Kafka <-> Matching Engine -->
+  <path d="M 960 696 L 960 500 L 1113 500 L 1113 486" fill="none" stroke="#A855F7" stroke-width="2.2" marker-start="url(#arrowPurple)" marker-end="url(#arrowPurple)"/>
+  <!-- Kafka -> Wallet, Market Data, Trade History -->
+  <path d="M 550 696 L 550 650 L 377 650 L 377 624" fill="none" stroke="#A855F7" stroke-width="1.8" marker-end="url(#arrowPurple)"/>
+  <path d="M 624 696 L 624 624" fill="none" stroke="#A855F7" stroke-width="1.8" marker-end="url(#arrowPurple)"/>
+  <path d="M 871 696 L 871 624" fill="none" stroke="#A855F7" stroke-width="1.8" marker-end="url(#arrowPurple)"/>
+  <!-- Notification Svc <-> SQS / SNS -->
+  <path d="M 1120 621 L 1120 697" fill="none" stroke="#A855F7" stroke-width="1.8" marker-end="url(#arrowPurple)"/>
+  <path d="M 470 737 L 488 737" fill="none" stroke="#A855F7" stroke-width="1.8" marker-start="url(#arrowPurple)"/>
+
+  <!-- ================= LAYER 5: DATA & STORAGE LAYER ================= -->
+  <g filter="url(#glow)">
+    <rect x="235" y="810" width="1030" height="228" rx="10" fill="#111E2E" stroke="#10B981" stroke-width="2"/>
+    <text x="255" y="834" fill="#34D399" font-size="12.5" font-weight="700" letter-spacing="1">5. POLYGLOT PERSISTENCE &amp; DATA LAYER (MULTI-AZ · ZERO RPO FOR CORE LEDGER)</text>
+
+    <!-- Aurora PostgreSQL -->
+    <rect x="252" y="850" width="190" height="170" rx="8" fill="#1E293B" stroke="#10B981" stroke-width="1.8"/>
+    <text x="347" y="874" fill="#34D399" font-size="13" font-weight="700" text-anchor="middle">Aurora PostgreSQL</text>
+    <text x="347" y="892" fill="#F8FAFC" font-size="11" font-weight="600" text-anchor="middle">Multi-AZ + RDS Proxy</text>
+    <line x1="268" y1="902" x2="426" y2="902" stroke="#334155"/>
+    <text x="347" y="920" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Double-Entry Wallet Ledger</text>
+    <text x="347" y="938" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• User Accounts &amp; KYC State</text>
+    <text x="347" y="956" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Transactional Outbox Table</text>
+    <text x="347" y="974" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Fast Failover (&lt;10-15s)</text>
+    <text x="347" y="998" fill="#10B981" font-size="10" font-weight="700" text-anchor="middle">ACID · RPO = 0</text>
+
+    <!-- ElastiCache Redis -->
+    <rect x="454" y="850" width="192" height="170" rx="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.8"/>
+    <text x="550" y="874" fill="#FBBF24" font-size="13" font-weight="700" text-anchor="middle">ElastiCache Redis 7</text>
+    <text x="550" y="892" fill="#F8FAFC" font-size="11" font-weight="600" text-anchor="middle">Cluster Mode · Multi-AZ</text>
+    <line x1="470" y1="902" x2="630" y2="902" stroke="#334155"/>
+    <text x="550" y="920" fill="#10B981" font-size="10.5" font-weight="700" text-anchor="middle">• Atomic Lua Balance Lock</text>
+    <text x="550" y="938" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• L2 Order Book Snapshot</text>
+    <text x="550" y="956" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• JWT Session &amp; Rate Limits</text>
+    <text x="550" y="974" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Idempotency Keys (TTL)</text>
+    <text x="550" y="998" fill="#FBBF24" font-size="10" font-weight="700" text-anchor="middle">Sub-ms Latency (&lt;1ms)</text>
+
+    <!-- Amazon DynamoDB -->
+    <rect x="658" y="850" width="190" height="170" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.8"/>
+    <text x="753" y="874" fill="#38BDF8" font-size="13" font-weight="700" text-anchor="middle">Amazon DynamoDB</text>
+    <text x="753" y="892" fill="#F8FAFC" font-size="11" font-weight="600" text-anchor="middle">On-Demand · Global Tables</text>
+    <line x1="674" y1="902" x2="832" y2="902" stroke="#334155"/>
+    <text x="753" y="920" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Trade Execution History</text>
+    <text x="753" y="938" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• User Order Lookup (CQRS)</text>
+    <text x="753" y="956" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• WebSocket Connection IDs</text>
+    <text x="753" y="974" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• API Keys Metadata</text>
+    <text x="753" y="998" fill="#38BDF8" font-size="10" font-weight="700" text-anchor="middle">Single-Digit ms at Any Scale</text>
+
+    <!-- Timestream for InfluxDB / TimescaleDB -->
+    <rect x="860" y="850" width="192" height="170" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.8"/>
+    <text x="956" y="874" fill="#38BDF8" font-size="12.5" font-weight="700" text-anchor="middle">Timestream for InfluxDB</text>
+    <text x="956" y="892" fill="#F8FAFC" font-size="11" font-weight="600" text-anchor="middle">(or TimescaleDB / QuestDB)</text>
+    <line x1="876" y1="902" x2="1036" y2="902" stroke="#334155"/>
+    <text x="956" y="920" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Real-Time OHLCV Candles</text>
+    <text x="956" y="938" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• 1s / 1m / 1h / 1d K-Lines</text>
+    <text x="956" y="956" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Market Volume Aggregations</text>
+    <text x="956" y="974" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Automated S3 Tiering</text>
+    <text x="956" y="998" fill="#38BDF8" font-size="10" font-weight="700" text-anchor="middle">Replaces Deprecated LiveAnalytics</text>
+
+    <!-- Amazon S3 -->
+    <rect x="1064" y="850" width="184" height="170" rx="8" fill="#1E293B" stroke="#10B981" stroke-width="1.8"/>
+    <text x="1156" y="874" fill="#34D399" font-size="13" font-weight="700" text-anchor="middle">Amazon S3 (WORM)</text>
+    <text x="1156" y="892" fill="#F8FAFC" font-size="11" font-weight="600" text-anchor="middle">Object Lock · Cross-Region</text>
+    <line x1="1080" y1="902" x2="1232" y2="902" stroke="#334155"/>
+    <text x="1156" y="920" fill="#10B981" font-size="10.5" font-weight="700" text-anchor="middle">• Order Book Snapshots</text>
+    <text x="1156" y="938" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Compliance Audit Logs</text>
+    <text x="1156" y="956" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• KYC Encrypted Documents</text>
+    <text x="1156" y="974" fill="#CBD5E1" font-size="10.5" text-anchor="middle">• Static UI Assets &amp; Backups</text>
+    <text x="1156" y="998" fill="#10B981" font-size="10" font-weight="700" text-anchor="middle">11 9s Durability · Glacier</text>
+  </g>
+
+  <!-- Data Layer Connections -->
+  <path d="M 347 621 L 347 847" fill="none" stroke="#10B981" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <path d="M 550 621 L 550 847" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <path d="M 753 621 L 753 847" fill="none" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowCyan)"/>
+  <path d="M 956 621 L 956 847" fill="none" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowCyan)"/>
+  <path d="M 1156 483 L 1156 847" fill="none" stroke="#10B981" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrowGreen)"/>
+
+  <!-- Footer Summary Bar -->
+  <rect x="20" y="1052" width="1460" height="52" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+  <text x="45" y="1074" fill="#38BDF8" font-size="12" font-weight="700">KEY ARCHITECTURAL UPGRADES FOR INTERVIEW DEFENSE:</text>
+  <text x="45" y="1093" fill="#E2E8F0" font-size="11.5">1) Atomic Redis Lua Fund Reservation prevents double-spend before async matching  |  2) Kafka acks=all + min.insync.replicas=2 guarantees RPO=0  |  3) Matching Engine S3/EBS Snapshots + Kafka Offset Replay ensures &lt;5s RTO  |  4) Timestream for InfluxDB replaces deprecated LiveAnalytics</text>
+</svg>
